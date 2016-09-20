@@ -1,0 +1,170 @@
+<!-- Purchase Order Builder
+============================= -->
+
+<apex:page standardController="Order__c" extensions="PobControllerExt">
+	<apex:pageMessages />
+	<apex:sectionHeader title="{!$Label.POB_Title}" subtitle="{!heading}"/>
+	<apex:form >
+		<apex:pageBlock title="{!$Label.POB_Title}" mode="edit">
+		
+			<!-- Buttons
+			============================= -->
+			<apex:pageBlockButtons >
+				<apex:commandButton value="{!$Label.POB_Save}" action="{!save}"/>
+				<apex:commandButton value="{!$Label.POB_Cancel}" action="{!cancel}"/>
+			</apex:pageBlockButtons>
+			
+			<!-- Details
+			============================= -->
+			<apex:pageBlockSection title="{!$Label.POB_Details}" columns="2" id="details">
+			
+				<!-- Name -->
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$ObjectType.Order__c.fields.Name.Label}"/>
+					<apex:outputPanel >
+						<apex:inputField value="{!Order__c.Name}" rendered="{!nameIsEditable==true}" required="true" />
+						<apex:outputText value="{!Order__c.Name}" rendered="{!nameIsEditable==false}" />
+					</apex:outputPanel>
+				</apex:pageBlockSectionItem>
+				
+				<!-- Status -->
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$ObjectType.Order__c.fields.Status__c.Label}"/>
+					<apex:outputPanel >
+						<apex:inputField value="{!Order__c.Status__c}" rendered="{!statusIsEditable==true}" required="true" />
+						<apex:outputText value="{!Order__c.Status__c}" rendered="{!statusIsEditable==false}" />
+					</apex:outputPanel>
+				</apex:pageBlockSectionItem>
+				
+				
+				<!-- Budget -->
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$ObjectType.Order__c.fields.Budget__c.Label}"/>
+					<apex:outputPanel >
+						<apex:inputField value="{!Order__c.Budget__c}" rendered="{!budgetIsEditable==true}" required="true"/>
+						<apex:outputText value="${0,number,###,###,##0}"  rendered="{!budgetIsEditable==false}">
+							<apex:param value="{!Order__c.Budget__c}"/>
+						</apex:outputText>
+					</apex:outputPanel>
+				</apex:pageBlockSectionItem>
+				
+				<!-- Store -->
+				<apex:inputField value="{!Order__c.Store__c}" required="true" />
+			</apex:pageBlockSection>
+			
+			<!-- Summary
+			==========================================================================================================================
+			IMPORTANT NOTE:
+			Requirement states "[..] as shown in Figure 1 Account Managers will be able to see summary stats for the purchase Order". 
+			My assumption is that the status has to be maintained based in real time with what is being added/removed to the order
+			using the purchase order builder, so that the summary reflects what the order will be once saved.
+			========================================================================================================================== -->
+			<apex:pageBlockSection title="{!$Label.POB_Summary}" columns="2" id="summary">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$Label.POB_Units}"/>
+					<apex:outputText value="{!units}"/>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$Label.POB_PricePerUnit}"/>
+					<apex:outputText value="${0,number,###,###,##0.00}" rendered="{!pricePerUnit!=null}">
+						<apex:param value="{!pricePerUnit}"/>
+					</apex:outputText>
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+
+			<!-- Filter & load indicator
+			================================ -->			
+			<apex:pageBlockSection title="{!$Label.POB_Lots}" columns="2">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$Label.POB_Filter}" for="filter"/>
+						<apex:actionRegion >
+							<apex:actionFunction name="jsFilter" action="{!updateFilter}" reRender="table, pagination" status="filterStatus" />
+				  			<apex:selectList size="1" value="{!categoryFilter}" onchange="jsFilter();">
+								<apex:selectOptions value="{!filterValues}"/>
+			      			</apex:selectList>
+			      		</apex:actionRegion>
+		      	</apex:pageBlockSectionItem>
+		      	<apex:pageBlockSectionItem >
+		      		<apex:actionStatus id="loadingStatus" startText="{!$Label.POB_Waiting}" />
+		      		<apex:actionStatus id="filterStatus" startText="{!$Label.POB_Waiting_Filter}" />
+		      	</apex:pageBlockSectionItem>
+		   </apex:pageBlockSection>
+		   
+		   <!-- Product Lots Table
+		   ============================= -->
+		   <apex:pageBlockSection columns="1">
+		   		<apex:outputPanel id="table">	
+					<apex:pageBlockTable var="item" value="{!wrappers}" rendered="{!wrappers.size>0}">
+					
+						<!-- Units -->
+						<apex:column headerValue="{!$ObjectType.Line_Item__c.fields.Units__c.Label}">
+							
+							<!-- On closed orders units are read only... -->
+							<apex:outputPanel rendered="{!unitsAreEditable==false}">
+								{!item.units}
+							</apex:outputPanel>
+							
+							<!-- ...while units on other orders can be edited -->
+							<apex:outputPanel rendered="{!unitsAreEditable==true}">
+								<apex:actionRegion >
+									<apex:inputField value="{!item.lineItem.Units__c}" required="true">
+										<apex:actionSupport event="onchange" action="{!updateSelection}" status="loadingStatus" reRender="summary, table"/>
+									</apex:inputField>
+								</apex:actionRegion>
+							</apex:outputPanel>
+							
+						</apex:column>
+						
+						<!-- Product name -->
+						<apex:column headerValue="{!$ObjectType.Lot__c.fields.Product__c.Label}">
+						{!item.product.Product__c}</apex:column>
+						
+						<!-- Lot number -->
+						<apex:column headerValue="{!$ObjectType.Lot__c.fields.Name.Label}">
+							<apex:outputLink value="/{!item.product.id}" target="_blank">{!item.product.name}</apex:outputLink>
+						</apex:column>
+						
+						<!-- Unit Price -->
+						<apex:column headerValue="{!$ObjectType.Lot__c.fields.Unit_Price__c.Label}">
+							<apex:outputText value="${0,number,###,###,##0.00}">
+							  <apex:param value="{!item.product.Unit_Price__c}"/>
+							</apex:outputText>
+						</apex:column>
+						
+						<!-- Product Category -->
+						<apex:column headerValue="{!$ObjectType.Lot__c.fields.Product_Category__c.Label}">{!item.product.Product_Category__c}</apex:column>
+						
+						<!-- Remaining Units -->
+						<apex:column headerValue="{!$ObjectType.Lot__c.fields.Remaining__c.Label}">
+							<apex:outputText value="{0,number,###,###,##0}">
+								<apex:param value="{!item.product.Remaining__c}"/>
+							</apex:outputText>
+						</apex:column>
+					</apex:pageBlockTable>
+					
+					<!-- A message is displayed when no lots are found -->					
+					<apex:outputPanel rendered="{!wrappers.size==0}">
+						<apex:outputText value="{!$Label.POB_No_Products}"/>
+					</apex:outputPanel>
+					
+				</apex:outputPanel>
+			</apex:pageBlockSection>
+			
+		   <!-- Pagination
+		   ============================= -->
+			<apex:pageBlockSection id="pagination">
+				<apex:panelGrid columns="5" rendered="{!wrappers.size>0}">
+					<apex:commandButton action="{!firstPage}" value="{!$Label.POB_First}" disabled="{!prevDisabled}" immediate="true" reRender="summary, pagination, table" status="loadingStatus"/>
+					<apex:commandButton action="{!prevPage}" value="{!$Label.POB_Prev}" disabled="{!prevDisabled}" immediate="true" reRender="summary, pagination, table" status="loadingStatus"/>
+					<apex:outputText value="{!$Label.POB_Page}">
+						<apex:param value="{!currentPage}"/>
+		      			<apex:param value="{!numberOfPages}"/>
+					</apex:outputText>
+					<apex:commandButton action="{!nextPage}" value="{!$Label.POB_Next}" disabled="{!nextDisabled}" immediate="true" reRender="summary, pagination, table" status="loadingStatus"/>
+					<apex:commandButton action="{!lastPage}" value="{!$Label.POB_Last}" disabled="{!nextDisabled}" immediate="true" reRender="summary, pagination, table" status="loadingStatus"/>
+				</apex:panelGrid>
+			</apex:pageBlockSection>
+   		</apex:pageBlock>
+   
+	</apex:form>
+</apex:page>
