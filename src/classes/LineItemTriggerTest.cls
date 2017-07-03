@@ -70,6 +70,8 @@ private class LineItemTriggerTest {
 			allTheLots = TestDataFactory.createLots(TEST_VOLUMES_NUMBER_OF_LOTS);
 			insert allTheLots;
 		}
+
+		System.assert(true);
 		
 		// Account manager creates accounts and orders
 		System.runAs(accountManager) {
