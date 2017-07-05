@@ -12,6 +12,7 @@ public with sharing class LineItemTriggerHandler {
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
 			orderIds.add(i.Order__c);
+			update i;
 		}
 		
 		// load required data: 1) related orders 2) force reload all line items for those orders
@@ -36,10 +37,12 @@ public with sharing class LineItemTriggerHandler {
 			thisOrderAmount = (thisOrderAmount!=null) ? thisOrderAmount : 0; 
 			thisOrderAmount += i.Amount__c; 
 			orderToAmountMap.put(i.Order__c, thisOrderAmount);
+			update i;
 		}
 		for (Order__c o : orders) {
 			Decimal orderAmount = orderToAmountMap.get(o.Id); 
 			o.Purchased__c = (orderAmount!=null) ? orderAmount : 0;
+			update o;
 		}
 	}
 	
