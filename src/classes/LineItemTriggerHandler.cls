@@ -1,4 +1,9 @@
-public class LineItemTriggerHandler {
+public without sharing class LineItemTriggerHandler {
+	
+	
+	public static void method() {
+		// empty
+	}
 		
 	/* Public methods
 	========================= */
