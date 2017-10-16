@@ -1,4 +1,4 @@
-public without sharing class LineItemTriggerHandler {
+public with sharing class LineItemTriggerHandler {
 		
 	
 	/** This handler methods is to be used on all relevant triggers events.
