@@ -1,12 +1,5 @@
 public without sharing class LineItemTriggerHandler {
 		
-	/* Public methods
-	========================= */
-	
-	// shift
-	
-	public void emptyNess() {
-	}
 	
 	/** This handler methods is to be used on all relevant triggers events.
 		It updates purchased amount on orders and update top product categories.
