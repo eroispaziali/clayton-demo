@@ -3,6 +3,8 @@ public without sharing class LineItemTriggerHandler {
 	/* Public methods
 	========================= */
 	
+	// shift
+	
 	public void emptyNess() {
 	}
 	
