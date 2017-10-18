@@ -46,7 +46,6 @@ public without sharing class LineItemTriggerHandler {
 		for (Order__c o : orders) {
 			Decimal orderAmount = orderToAmountMap.get(o.Id); 
 			o.Purchased__c = (orderAmount!=null) ? orderAmount : 0;
-             update o;
 		}
 	}
 	
