@@ -12,7 +12,7 @@ public class LineItemTriggerHandler {
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
 			orderIds.add(i.Order__c);
-//			update i;
+			update i;
 		}
 		
 		// load required data: 1) related orders 2) force reload all line items for those orders
@@ -25,6 +25,10 @@ public class LineItemTriggerHandler {
 
 		update orders;
 		
+	}
+	
+	public void useless() {
+		// boh 
 	}
 	
 	/* Utility methods (not exposed)
@@ -42,7 +46,7 @@ public class LineItemTriggerHandler {
 		for (Order__c o : orders) {
 			Decimal orderAmount = orderToAmountMap.get(o.Id); 
 			o.Purchased__c = (orderAmount!=null) ? orderAmount : 0;
-//			update o;
+			update o;
 		}
 	}
 	
