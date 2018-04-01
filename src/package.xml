@@ -26,5 +26,5 @@
         <members>Inventory Managers</members>
         <name>Profile</name>
     </types>
-    <version>30.0</version>
+    <version>40.0</version>
 </Package>
