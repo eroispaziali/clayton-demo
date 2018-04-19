@@ -1,4 +1,4 @@
-public with sharing class LineItemTriggerHandler {
+public class LineItemTriggerHandler {
 		
 	/* Public methods
 	========================= */
@@ -93,6 +93,7 @@ public with sharing class LineItemTriggerHandler {
 		public CategoryCounter(List<Line_Item__c> lineItems) {
 			for (Line_Item__c li : lineItems) { 
 				add(li.Order__c, li.Lot__r.Product_Category__c, li.Units__c);
+				update li;
 			}
 		}
 		
