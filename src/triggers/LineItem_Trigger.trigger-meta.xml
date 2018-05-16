@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexTrigger xmlns="http://soap.sforce.com/2006/04/metadata">
+<<<<<<< HEAD
+    <apiVersion>31.0</apiVersion>
+=======
+    <apiVersion>28.0</apiVersion>
+>>>>>>> 4ff73f24e6bdfecf588dd2c6c4221ccf3c21f2f8
+    <status>Active</status>
+</ApexTrigger>
