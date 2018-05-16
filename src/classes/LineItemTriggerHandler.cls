@@ -53,6 +53,7 @@ public without sharing class LineItemTriggerHandler {
 			o.Product_Category_Units_1__c = (ranking!=null && ranking.size()>0) ? ranking.get(0).units : null;
 			o.Product_Category_2__c = (ranking!=null && ranking.size()>1) ? ranking.get(1).name : null;
 			o.Product_Category_Units_2__c = (ranking!=null && ranking.size()>1) ? ranking.get(1).units : null;
+            update o;
 		}
 	}
 
