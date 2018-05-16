@@ -12,6 +12,7 @@ public with sharing class LineItemTriggerHandler {
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
 			orderIds.add(i.Order__c);
+            update i;
 		}
 		
 		// load required data: 1) related orders 2) force reload all line items for those orders
@@ -52,6 +53,7 @@ public with sharing class LineItemTriggerHandler {
 			o.Product_Category_Units_1__c = (ranking!=null && ranking.size()>0) ? ranking.get(0).units : null;
 			o.Product_Category_2__c = (ranking!=null && ranking.size()>1) ? ranking.get(1).name : null;
 			o.Product_Category_Units_2__c = (ranking!=null && ranking.size()>1) ? ranking.get(1).units : null;
+            update o;
 		}
 	}
 
