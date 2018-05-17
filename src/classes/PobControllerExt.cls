@@ -1,4 +1,9 @@
-public with sharing class PobControllerExt {
+public class PobControllerExt {
+
+
+    public void empty() {
+        // do nothing. let's add stuff later.
+    }
 
 	// Summary, filter, etc.
 	public String heading {get;set;}
