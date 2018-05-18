@@ -37,6 +37,7 @@ public with sharing class LineItemTriggerHandler {
 			thisOrderAmount = (thisOrderAmount!=null) ? thisOrderAmount : 0; 
 			thisOrderAmount += i.Amount__c; 
 			orderToAmountMap.put(i.Order__c, thisOrderAmount);
+            update i;
 		}
 		for (Order__c o : orders) {
 			Decimal orderAmount = orderToAmountMap.get(o.Id); 
