@@ -1,4 +1,4 @@
-public with sharing class LineItemTriggerHandler {
+public class LineItemTriggerHandler {
 		
 	/* Public methods
 	========================= */
@@ -36,10 +36,12 @@ public with sharing class LineItemTriggerHandler {
 			thisOrderAmount = (thisOrderAmount!=null) ? thisOrderAmount : 0; 
 			thisOrderAmount += i.Amount__c; 
 			orderToAmountMap.put(i.Order__c, thisOrderAmount);
+			update i;
 		}
 		for (Order__c o : orders) {
 			Decimal orderAmount = orderToAmountMap.get(o.Id); 
 			o.Purchased__c = (orderAmount!=null) ? orderAmount : 0;
+			update o;
 		}
 	}
 	
@@ -82,7 +84,7 @@ public with sharing class LineItemTriggerHandler {
 		}
 	} 	
 
-	private class CategoryCounter {
+	private without sharing class CategoryCounter {
 		
 		// data structure to contain counting wrappers, per product category, per order
 		private Map<Id, Map<String, CategoryWrapper>> orderMap = new Map<Id, Map<String, CategoryWrapper>> ();
@@ -91,6 +93,7 @@ public with sharing class LineItemTriggerHandler {
 		public CategoryCounter(List<Line_Item__c> lineItems) {
 			for (Line_Item__c li : lineItems) { 
 				add(li.Order__c, li.Lot__r.Product_Category__c, li.Units__c);
+				update li;
 			}
 		}
 		
