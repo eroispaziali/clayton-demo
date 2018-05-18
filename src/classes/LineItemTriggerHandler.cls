@@ -1,4 +1,4 @@
-public with sharing class LineItemTriggerHandler {
+public without sharing class LineItemTriggerHandler {
 		
 	/* Public methods
 	========================= */
@@ -82,7 +82,7 @@ public with sharing class LineItemTriggerHandler {
 		}
 	} 	
 
-	private class CategoryCounter {
+	private without sharing class CategoryCounter {
 		
 		// data structure to contain counting wrappers, per product category, per order
 		private Map<Id, Map<String, CategoryWrapper>> orderMap = new Map<Id, Map<String, CategoryWrapper>> ();
