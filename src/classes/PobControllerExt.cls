@@ -1,4 +1,4 @@
-public class PobControllerExt {
+public without sharing class PobControllerExt {
 
 
     public void empty() {
