@@ -32,6 +32,7 @@ public with sharing class LineItemTriggerHandler {
 	private static void updatePurchasedAmount(List<Order__c> orders, List<Line_Item__c> lineItems) {
 		Map<Id, Decimal> orderToAmountMap = new Map<Id, Decimal>();
 		for (Line_Item__c i : lineItems) {
+			
 			Decimal thisOrderAmount = orderToAmountMap.get(i.Order__c);
 			thisOrderAmount = (thisOrderAmount!=null) ? thisOrderAmount : 0; 
 			thisOrderAmount += i.Amount__c; 
