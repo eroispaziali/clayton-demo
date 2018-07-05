@@ -16,6 +16,8 @@ public class LineItemTriggerHandler {
 		Logic is fully bulkified. */		
 	public static void handle(List<Line_Item__c> items) {
 		
+		// just a comment for a fake code review
+
 		// collect related orders
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
@@ -32,7 +34,6 @@ public class LineItemTriggerHandler {
 		updateCategories(orders, lineItems);
 
 		update orders;
-		
 	}
 	
 	public void useless() {
@@ -45,6 +46,7 @@ public class LineItemTriggerHandler {
 	private static void updatePurchasedAmount(List<Order__c> orders, List<Line_Item__c> lineItems) {
 		Map<Id, Decimal> orderToAmountMap = new Map<Id, Decimal>();
 		for (Line_Item__c i : lineItems) {
+
 			Decimal thisOrderAmount = orderToAmountMap.get(i.Order__c);
 			thisOrderAmount = (thisOrderAmount!=null) ? thisOrderAmount : 0; 
 			thisOrderAmount += i.Amount__c; 
