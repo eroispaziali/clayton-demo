@@ -5,4 +5,5 @@ public without sharing class MyClass {
              Account account = [SELECT id,AccountId FROM Contact WHERE Id = :malicious LIMIT 1];
       }
 
+
  }
