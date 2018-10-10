@@ -139,7 +139,8 @@ private class PobControllerExtTest {
     	- prev/next
     	- first/last
     	====================================================================== */	
-	static testMethod void testPaginationWithProducts() {
+	@IsTest
+	static void testPaginationWithProducts() {
 		
 		// Setup users
 		User accountManager = TestDataFactory.createUser('Account Managers', 'aManager');
