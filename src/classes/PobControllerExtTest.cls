@@ -42,7 +42,8 @@ private class PobControllerExtTest {
     		2) when turned on only products of a specific category must be shown
     		3) if the value of the filter isn't found, no results shoul be displayed
     	========================================================================================== */
-	static testMethod void testCategoryFilter() {
+	@IsTest
+	static void testCategoryFilter() {
 		
 		// Vars, users & data
 		Account myAccount;
