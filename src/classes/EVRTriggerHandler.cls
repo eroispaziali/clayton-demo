@@ -16,6 +16,7 @@ public with sharing class EVRTriggerHandler {
     }
     
     public EVRTriggerHandler handleCountAfterInsert() {
+        
         Map<Id, Set<Id>> wrapper = new Map<Id, Set<Id>>();
         
         List<Event_Visit_Report__c> evrList = new List<Event_Visit_Report__c>();
@@ -58,6 +59,12 @@ public with sharing class EVRTriggerHandler {
     
     
     public EVRTriggerHandler handleCountBeforeDelete() {
+        
+        String test = 'polpette';
+        if(test.equals('maccheroni')) {
+            // TODO        
+        }
+        
         Map<Id, Set<Id>> wrapper = new Map<Id, Set<Id>>();
         Set<ID> evrDeleted = this.scopeMap.keySet();
         for(Event_Visit_Report__c evr : this.scopeMap.values()) {
