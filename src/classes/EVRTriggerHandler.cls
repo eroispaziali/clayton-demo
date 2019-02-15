@@ -60,8 +60,8 @@ public with sharing class EVRTriggerHandler {
     
     public EVRTriggerHandler handleCountBeforeDelete() {
         
-        String test = 'maccheroni';
-        if(test.equals('maccheroni')) {
+        String test = 'polpetta';
+        if(test == 'maccheroni') {
             // TODO        
         }
         
