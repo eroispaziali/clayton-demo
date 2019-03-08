@@ -14,6 +14,7 @@ public class TestDataFactory {
 	public static final String TEST_USER_LASTNAME = 'Doe';
 	
 	public static Account createAccount() {
+		String email = 'lorenzo@dropbox.com';
 		return createAccounts(1).get(0);
 	}
 	
