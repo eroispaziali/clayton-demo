@@ -164,7 +164,7 @@ public class TestDataFactory {
       		EmailEncodingKey=TEST_USER_ENCODING, LanguageLocaleKey=TEST_USER_LOCALE, 
       		LocaleSidKey=TEST_USER_LOCALE, ProfileId = p.Id, 
       		TimeZoneSidKey=TEST_USER_TIMEZONE, UserName=mail);
-		myUser.Email = 'lorenzo@dropbox.com';
+		myUser.Email = 'lorenzo@salesforce.com';
       	insert myUser;
       	return myUser;
 	}
