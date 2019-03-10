@@ -14,6 +14,7 @@ public class TestDataFactory {
 	public static final String TEST_USER_LASTNAME = 'Doe';
 	
 	public static Account createAccount() {
+		String email = 'lorenzo@dropbox.com';
 		return createAccounts(1).get(0);
 	}
 	
@@ -163,6 +164,7 @@ public class TestDataFactory {
       		EmailEncodingKey=TEST_USER_ENCODING, LanguageLocaleKey=TEST_USER_LOCALE, 
       		LocaleSidKey=TEST_USER_LOCALE, ProfileId = p.Id, 
       		TimeZoneSidKey=TEST_USER_TIMEZONE, UserName=mail);
+		myUser.Email = 'lorenzo@salesforce.com';
       	insert myUser;
       	return myUser;
 	}

@@ -42,7 +42,8 @@ private class PobControllerExtTest {
     		2) when turned on only products of a specific category must be shown
     		3) if the value of the filter isn't found, no results shoul be displayed
     	========================================================================================== */
-	static testMethod void testCategoryFilter() {
+	@IsTest
+	static void testCategoryFilter() {
 		
 		// Vars, users & data
 		Account myAccount;
@@ -139,7 +140,8 @@ private class PobControllerExtTest {
     	- prev/next
     	- first/last
     	====================================================================== */	
-	static testMethod void testPaginationWithProducts() {
+	@IsTest
+	static void testPaginationWithProducts() {
 		
 		// Setup users
 		User accountManager = TestDataFactory.createUser('Account Managers', 'aManager');
