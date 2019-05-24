@@ -26,7 +26,7 @@ public with sharing class LineItemTriggerHandler {
 		
 	}
 	
-	/* Utility methods (not exposed)
+	/* Utility methods (not exposed)2
 	================================== */
 	
 	private static void updatePurchasedAmount(List<Order__c> orders, List<Line_Item__c> lineItems) {
