@@ -157,7 +157,7 @@ public class TestDataFactory {
 	
 	public static User createUser(String profile, String myAlias) {
 		Profile p = [SELECT Id FROM Profile WHERE Name=:profile LIMIT 1][0];
-		String mail = 'john.doe@lidl.com'; 
+		String mail = 'john.doe@dummy-email.com'; 
 		User myUser = new User(alias = myAlias, Email=mail, 
 			FirstName = TEST_USER_FIRSTNAME, LastName=TEST_USER_LASTNAME,
       		EmailEncodingKey=TEST_USER_ENCODING, LanguageLocaleKey=TEST_USER_LOCALE, 
