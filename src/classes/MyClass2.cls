@@ -23,5 +23,9 @@ public class MyClass {
 		}
 	}
 	
+	global public void useless() {
+		System.debug("useless");
+	}
+	
 		
 }
