@@ -1,4 +1,4 @@
-public class EventVisitReportTasksEmailController {
+public class EventVisitReportTasksEmailControllerEqual {
 
     private final Event_Visit_Report__c myEVR;
     public boolean hasErrors {get;set;}
