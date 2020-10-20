@@ -195,6 +195,7 @@ public with sharing class PobControllerExt {
 			} 
 			
 			// delete & upsert line items
+			update toBeDeleted;
 			delete toBeDeleted;
 			
 			// UPSERT, check outcome on this...
