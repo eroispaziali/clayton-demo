@@ -1,4 +1,4 @@
-public with sharing class ContactUpdateExtensionWithProblem1 {
+public class ContactUpdateExtensionWithProblem1 {
   public String statusToSet {get;set;}
   private Contact c;
 
