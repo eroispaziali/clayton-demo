@@ -14,15 +14,20 @@ public without sharing class EVRTriggerHandler {
         this.scope = scope;
         this.scopeMap = scopeMap;
     }
+
+
+
     
     public EVRTriggerHandler handleCountAfterInsert() {
-        
         String myString2 = 'MY_HARDCODED_STRING';
         Blob hardCodedIV = Blob.valueOf('Hardcoded IV 123');
         Blob myKey2 = Blob.valueOf(myString2);
         Blob data = Blob.valueOf('Data to be encrypted');
         Blob encrypted = Crypto.encrypt('AES128', myKey2, hardCodedIV, data);
         
+
+        // Blob encrypted = Crypto.encrypt('AES128', myKey2, hardCodedIV, data);
+
         
         Map<Id, Set<Id>> wrapper = new Map<Id, Set<Id>>();
         
