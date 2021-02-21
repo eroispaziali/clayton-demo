@@ -1,0 +1,15 @@
+<apex:page standardcontroller="Contact" extensions="ContactUpdateExtensionWithProblem2">
+  <apex:pageBlock title="Contacts">
+    <apex:outputField value="{!Contact.Name}" />
+    <apex:outputField value="{!Contact.Phone}" />
+
+    <apex:form>
+      <apex:selectList value="{!statusToSet}">
+        <apex:selectOption itemValue="Verified" itemLabel="Verified" />
+        <apex:selectOption itemValue="Not Verified" itemLabel="Not Verified" />
+        <apex:selectOption itemValue="Unknown" itemLabel="Unknown" />
+      </apex:selectList>
+      <apex:commandButton action="{!updateStatus}" value="Update" />
+    </apex:form>
+  </apex:pageBlock>
+</apex:page>
