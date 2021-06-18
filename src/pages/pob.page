@@ -6,8 +6,12 @@
 <apex:page standardController="Order__c" extensions="PobControllerExt">
 	<apex:pageMessages />
 	<apex:sectionHeader title="{!$Label.POB_Title}" subtitle="{!heading}"/>
+	
+	<apex:outputText value="{!unescapedVarible}" escape="false" />
+	
 	<apex:form >
 		<apex:pageBlock title="{!$Label.POB_Title}" mode="edit">
+		
 		
 			<!-- Buttons
 			============================= -->
