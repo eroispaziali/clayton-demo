@@ -1,0 +1,6 @@
+<apex:page>
+      <apex:outputText value="The unformatted time right now is: {! NOW() }" escape="false" />
+      <apex:outputText value="{!$CurrentPage.Parameters.id}" escape="false" />
+      <apex:pageMessages escape="false" />
+      <a href="http://test.com" target="_blank">Click here</a>
+</apex:page>
