@@ -1,6 +1,8 @@
-public with sharing class LineItemTriggerHandler {
+public with sharing class LineItemTriggerHandler10 {
 		
   
+
+	
 	/** 
 	This handler methods is to be used on all relevant triggers events.
 		It updates purchased amount on orders and update top product categories.
@@ -14,7 +16,6 @@ public with sharing class LineItemTriggerHandler {
 		for (Line_Item__c i : items) {
 			orderIds.add(i.Order__c);
 			update i;
-			
 		}
 		
 		// load required data: 1) related orders 2) force reload all line items for those orders
