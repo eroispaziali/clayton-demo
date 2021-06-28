@@ -13,7 +13,10 @@ public with sharing class LineItemTriggerHandler {
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
 			orderIds.add(i.Order__c);
-			update i;
+
+
+
+			upsert i;
 			
 		}
 		
