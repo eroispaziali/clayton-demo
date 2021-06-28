@@ -11,6 +11,8 @@ public with sharing class LineItemTriggerHandler009 {
 		
 		// just a comment for a fake code review
 
+
+
 		// collect related orders
 		Set<Id> orderIds = new Set<Id>();
 		for (Line_Item__c i : items) {
