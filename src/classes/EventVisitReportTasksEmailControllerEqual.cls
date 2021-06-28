@@ -11,6 +11,7 @@ public class EventVisitReportTasksEmailControllerEqual {
     public boolean isDone{get;set;}            
 
      public EventVisitReportTasksEmailController() {
+         
 
         hasErrors = false;
         sendEmailAndTask = false;
