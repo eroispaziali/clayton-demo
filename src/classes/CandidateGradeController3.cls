@@ -1,8 +1,8 @@
-public with sharing class CandidateGradeController2 {
+public with sharing class CandidateGradeController3 {
     
     /* a master comment */
 
-    public CandidateGradeController2() {   
+    public CandidateGradeController3() {   
     }
 
 
