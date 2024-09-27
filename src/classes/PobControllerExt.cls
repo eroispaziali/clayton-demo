@@ -1,8 +1,13 @@
 public with sharing class PobControllerExt {
 
+	
+	
+	
 	// Summary, filter, etc.
 	public String heading {get;set;}
+	
 	public String categoryFilter {get;set;}
+	
 	private static final String SOQL_WITHOUT_FILTER = 'SELECT Id, Name, Product__c, Product_Category__c, Unit_Price__c, Remaining__c FROM Lot__c WHERE (Remaining__c>0 OR Id in :existingLotsInThisOrder) ORDER BY Product__c ASC';
 	private static final String SOQL_WITH_FILTER = 'SELECT Id, Name, Product__c, Product_Category__c, Unit_Price__c, Remaining__c FROM Lot__c WHERE (Remaining__c>0 OR Id in :existingLotsInThisOrder) AND Product_Category__c = :categoryFilter ORDER BY Product__c ASC';
 	private static final Integer PAGE_SIZE = 5;
@@ -190,6 +195,7 @@ public with sharing class PobControllerExt {
 			} 
 			
 			// delete & upsert line items
+			update toBeDeleted;
 			delete toBeDeleted;
 			
 			// UPSERT, check outcome on this...
